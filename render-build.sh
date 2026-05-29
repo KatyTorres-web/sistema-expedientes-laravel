@@ -16,6 +16,9 @@ chmod -R 775 storage bootstrap/cache
 echo "🧹 Limpiando caches viejos..."
 php artisan optimize:clear
 
+npm install
+npm run build
+
 echo "⚙️ Generando cache de producción..."
 php artisan config:cache
 php artisan route:cache
