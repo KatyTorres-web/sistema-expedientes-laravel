@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit
 
-composer install --no-dev --optimize-autoloader
+# 1. Instalar dependencias
+composer install --no-dev --prefer-dist --optimize-autoloader
 
-php artisan config:clear
-php artisan config:cache
-
-php artisan route:cache
-php artisan view:cache
+# 2. Solo limpiar cache (seguro en build)
+php artisan optimize:clear
