@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
 set -o errexit
 
-# 1. Instalar dependencias
+echo "🚀 Instalando dependencias..."
 composer install --no-dev --prefer-dist --optimize-autoloader
-mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache
+
+echo "📁 Creando carpetas necesarias..."
+mkdir -p storage/framework/cache \
+storage/framework/sessions \
+storage/framework/views \
+bootstrap/cache
+
+echo "🔐 Ajustando permisos..."
 chmod -R 775 storage bootstrap/cache
 
-# 2. Solo limpiar cache (seguro en build)
+echo "🧹 Limpiando caches viejos..."
 php artisan optimize:clear
+
+echo "⚙️ Generando cache de producción..."
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
