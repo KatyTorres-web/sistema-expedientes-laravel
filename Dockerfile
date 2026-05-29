@@ -35,6 +35,14 @@ RUN a2enmod rewrite
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+RUN mkdir -p storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    bootstrap/cache
+
+RUN chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
+
 EXPOSE 80
 
 CMD ["apache2-foreground"]

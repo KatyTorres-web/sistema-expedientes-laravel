@@ -32,3 +32,5 @@ Thumbs.db
 .env
 /vendor
 /node_modules
+/storage/*.key
+/bootstrap/cache/*.key
