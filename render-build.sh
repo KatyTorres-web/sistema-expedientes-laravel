@@ -13,14 +13,20 @@ bootstrap/cache
 echo "🔐 Ajustando permisos..."
 chmod -R 775 storage bootstrap/cache
 
-echo "🧹 Limpiando caches viejos..."
-php artisan optimize:clear
 
 npm install
 npm run build
 
-echo "⚙️ Generando cache de producción..."
+echo "🧹 Clear caches"
+php artisan config:clear
+php artisan cache:clear || true
+php artisan route:clear
+php artisan view:clear
+
+echo "📦 Run migrations"
+php artisan migrate --force --no-interaction
+
+echo "⚙️ Re-cache app"
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-php artisan migrate --force
