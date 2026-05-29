@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'prevent-back' => \App\Http\Middleware\PreventBackHistory::class,
             'first.login' => \App\Http\Middleware\CheckFirstLogin::class,
         ]);
+            $middleware->trustProxies(at: '*'); // Confía en el proxy de Render
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
