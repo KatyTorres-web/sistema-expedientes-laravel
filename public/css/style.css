@@ -1,0 +1,498 @@
+/* 1. ESTILOS GLOBALES Y BASE */
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(13deg, #d3f2ff, #f9ffed, #ffdfdf, #ffffff);
+    background-attachment: fixed;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Contenedor principal que envuelve sidebar y contenido */
+.main-container {
+    height: 100vh;
+    padding: 0px 5px 10px 10px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Forzado de mayúsculas general */
+input:not([type="password"]):not([name="username"]):not([name="password"]):not([name="email"]):not([name="password_confirmation"]), 
+textarea, select, .table td, .badge-status {
+    text-transform: uppercase;
+}
+
+input::placeholder {
+    text-transform: uppercase;
+}
+
+
+
+/* 2. SIDEBAR (MENÚ LATERAL) */
+.sidebar {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1.5px solid #ffc5c5;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-item {
+    border-radius: 15px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 95px;
+}
+
+.menu-item i {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.menu-text {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Colores por sección en el menú */
+.panel-principal { background-color: #ffcccc; }
+.expedientes { background-color: #fff9c4; }
+.usuarios { background-color: #e0f7fa; }
+.historial { background-color: #f3e5f5; }
+.perfil { background-color: #e8f5e9; }
+
+/* Estado Activo del Menú */
+.menu-item.active {
+    background-color: #ff4d4d !important;
+    box-shadow: 0 6px 15px rgba(255, 77, 77, 0.3);
+    height: auto;
+    padding: 12px 20px;
+    width: fit-content;
+    align-self: center;
+    transform: scale(1.05);
+}
+
+.menu-item.active i {
+    display: none;
+}
+
+.menu-item.active .menu-text {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Hover y Responsive Sidebar */
+.menu-item:hover:not(.active) {
+    transform: translateY(-4px);
+    filter: brightness(0.95);
+}
+
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 80px;
+        padding: 20px 8px;
+    }
+    .menu-text {
+        display: none;
+    }
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+    .menu-item i {
+        margin-right: 0;
+        font-size: 1.6rem;
+    }
+}
+
+/* ==========================================================================
+   3. ESTRUCTURA DE CONTENIDO (HEADER Y MAIN)
+   ========================================================================== */
+.header-box {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid #ffc5c5;
+    padding: 5px 20px;
+    margin-bottom: 8px;
+}
+
+.content-box {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid #ffc5c5;
+    padding: 30px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* ==========================================================================
+   4. VISTA DE LOGIN Y AUTENTICACIÓN
+   ========================================================================== */
+.top-section {
+    text-align: center;
+    padding: 20px 0 20px 0;
+    border-top: 2px solid #ffc5c5;
+    border-bottom: 2px solid #ffc5c5;
+    background: rgba(255, 255, 255, 0.6); 
+    margin: 10px auto 0 auto; 
+}
+
+.top-section h1 {
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: #a40000;
+}
+
+.login-container {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    border: 2px solid #ffc5c5;
+    padding: 35px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card h4 {
+    color: #a40000;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.btn-login {
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 30px;
+    padding: 12px;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #e60000;
+}
+
+.forgot-link {
+    color: #a40000;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.illustration {
+    max-width: 550px;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); /* Le da profundidad */
+    transition: transform 0.5s ease;
+}
+
+.illustration:hover {
+    transform: translateY(-10px); /* Un pequeño efecto de flotación */
+}
+
+@media (max-width: 992px) {
+    .illustration { display: none; }
+}
+
+/* Restablecer Contraseña */
+.reset-card {
+    max-width: 480px;
+    position: relative;
+}
+
+.reset-card p {
+    text-align: center;
+    color: #a40000;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.reset-card .email-box {
+    background-color: #ffeaea;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   5. DASHBOARD (ESTADÍSTICAS Y ACCESOS)
+   ========================================================================== */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card-stat {
+    background: white;
+    border: 2px solid #7ebfff;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card-stat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(126, 191, 255, 0.2);
+}
+
+.stat-title {
+    color: #4da3ff;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.stat-number {
+    color: #4da3ff;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Variantes de color para Dashboard Analista */
+.card-stat.blue { border-color: #4da3ff; }
+.card-stat.red { border-color: #ff4d4d; }
+.card-stat.green { border-color: #28a745; }
+.card-stat.purple { border-color: #6a1b9a; }
+
+.card-stat.blue .stat-title, .card-stat.blue .stat-number { color: #4da3ff; }
+.card-stat.red .stat-title, .card-stat.red .stat-number { color: #ff4d4d; }
+.card-stat.green .stat-title, .card-stat.green .stat-number { color: #28a745; }
+.card-stat.purple .stat-title, .card-stat.purple .stat-number { color: #6a1b9a; }
+
+/* Botones de Acceso Rápido Dashboard */
+.btn-quick-access {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    height: 70px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.btn-green { background-color: #d4ffd4; border-color: #98fb98; }
+.btn-yellow { background-color: #fff4cc; border-color: #ffe082; }
+
+.btn-quick-access.thinner {
+    height: 45px;
+    width: auto;
+    padding: 0 35px;
+    font-size: 1rem;
+    border-radius: 12px;
+}
+
+.dashboard-full {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   6. MÓDULO DE EXPEDIENTES (LISTADO Y FILTROS)
+   ========================================================================== */
+.card-filter {
+    border-radius: 15px;
+    background-color: white;
+}
+
+.border-pink { border: 1.5px solid #ffc5c5 !important; }
+
+/* Estilos de Tabla de Datos */
+.custom-table { font-size: 0.85rem; }
+
+.custom-table thead th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding: 12px;
+}
+
+.custom-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.custom-table tbody tr:hover { background-color: #f9f9f9; }
+
+/* Badges de Estado (Expedientes) */
+.badge-status {
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.badge-derivado { background-color: #ffcccc; color: #a40000; border: 1px solid #ffb3b3; }
+.badge-atendido { background-color: #d4ffd4; color: #2d6a4f; border: 1px solid #98fb98; }
+.badge-registrado { background-color: #fff9c4; color: #856404; border: 1px solid #ffe082; }
+.badge-devuelto { background-color: #f3e5f5; color: #6a1b9a; border: 1px solid #e1bee7; }
+.badge-reproceso { background-color: #ffe8cc; color: #d97706; border: 1px solid #fbbf24; }
+
+/* ==========================================================================
+   7. FORMULARIOS Y DETALLES DE EXPEDIENTE
+   ========================================================================== */
+.border-blue-custom { border: 2px solid #4da3ff !important; }
+
+#createExpedienteForm .form-control, 
+#createExpedienteForm .form-select {
+    background-color: #f1f1f1 !important;
+    border-radius: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.form-thin {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    min-height: calc(1.5em + 0.5rem + 2px) !important;
+    font-size: 0.85rem !important;
+    height: 32px !important;
+}
+
+.label-small { font-size: 0.8rem; font-weight: 700; color: #555; }
+
+.data-box {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 6px 15px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+/* Cabeceras de ID y Nro Exp en Detalles */
+.badge-header-blue {
+    background-color: #d3e5ff;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-radius: 12px;
+}
+
+.badge-header-purple {
+    background-color: #f3e5f5;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-radius: 12px;
+}
+
+.scroll-expediente {
+    max-height: 70vh;  
+    overflow-y: auto;   
+    overflow-x: hidden; 
+}
+
+/* Custom Scrollbar */
+.scroll-expediente::-webkit-scrollbar { width:8px; }
+.scroll-expediente::-webkit-scrollbar-thumb { background:#c9c9c9; border-radius:10px; }
+.scroll-expediente::-webkit-scrollbar-thumb:hover { background:#a8a8a8; }
+
+/* Botones de Acción en Ficha */
+.btn-derivar-exp {
+    background-color: #e8f3ff;
+    color: #0d6efd;
+    border: 1px solid #b6d4fe;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-weight: 600;
+}
+
+.btn-devolver-exp {
+    background-color: #ffecec;
+    color: #dc3545;
+    border: 1px solid #f5c2c7;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   8. COMPONENTES REUTILIZABLES (BOTONES, PAGINACIÓN, MODALES)
+   ========================================================================== */
+.btn-primary-custom { background-color: #4da3ff; color: white; border: none; border-radius: 12px; padding: 8px 20px; font-weight: 600; }
+.btn-outline-secondary-custom { border: 1.5px solid #ffc5c5; color: #666; border-radius: 12px; background-color: white; padding: 8px 20px; font-weight: 600; }
+.btn-secondary-custom { background-color: #c0c0c0; color: #444; border: none; border-radius: 10px; font-weight: 600; }
+.btn-export-excel { background-color: #c7f9cc; color: black; border-radius: 12px; border: 1px solid #a8e6cf; padding: 8px 25px; font-weight: 700; }
+
+.form-control { border-radius: 12px; padding: 12px 15px; border: 1.5px solid #ccc; }
+
+/* Paginación */
+.pagination .page-link { border-radius:8px; margin:0 2px; color:#0d6efd; border:1px solid #dee2e6; }
+.pagination .page-item.active .page-link { background-color:#0d6efd; border-color:#0d6efd; color:white !important; font-weight:600; }
+
+/* Paneles Flotantes y Modales */
+.panel-derivar {
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.25);
+    display:flex; align-items:center; justify-content:center; z-index:2000;
+}
+.panel-derivar-content { background:white; border-radius:14px; width:360px; box-shadow:0 10px 30px rgba(0,0,0,.15); }
+
+/* ==========================================================================
+   9. GESTIÓN DE USUARIOS Y ÁREAS
+   ========================================================================== */
+.btn-gestion-areas { background-color: #d4ffd4; color: black; border-radius: 20px; padding: 10px 25px; font-weight: 700; border: 1px solid #c1eec1; }
+.btn-anadir-usuario { background-color: #ffd4d4; color: black; border-radius: 20px; padding: 10px 25px; font-weight: 700; border: 1px solid #ffc1c1; }
+
+/* Badges de Roles de Usuario */
+.badge-rol { padding: 5px 20px; border-radius: 50px; font-weight: 500; font-size: 0.85rem; display: inline-block; border: 1px solid transparent; }
+.rol-admin { background-color: #e0f2fe; color: #0369a1; border-color: #000; }
+.rol-analista { background-color: #fef9c3; color: #854d0e; border-color: #000; }
+
+/* Badges de Estado de Usuario */
+.badge-estado-user { padding: 5px 20px; border-radius: 50px; font-weight: 500; font-size: 0.85rem; display: inline-block; }
+.user-activo { background-color: #dcfce7; color: #166534; border: 1px solid #166534; }
+.user-inactivo { background-color: #e5e7eb; color: #374151; border: 1px solid #374151; }
+
+/* Gestión de Áreas */
+.btn-nueva-area { background-color: #dcfce7; color: black; border: 1px solid #22c55e; border-radius: 15px; font-weight: 700; }
+.badge-area-status { padding: 4px 20px; border-radius: 50px; font-weight: 500; font-size: 0.85rem; display: inline-block; }
+.area-activa { background-color: #dcfce7; color: #166534; border: 1px solid #166534; }
+.area-inactiva { background-color: #f3f4f6; color: #4b5563; border: 1px solid #4b5563; }

@@ -1,0 +1,818 @@
+/* = 1. ESTILOS GLOBALES Y BASE = */
+html,body {height: 100%;margin: 0;background: linear-gradient(13deg, #d3f2ff, #f9ffed, #ffdfdf, #ffffff); background-attachment: fixed;font-family: "Segoe UI", sans-serif;}
+.main-container {height: 100vh;padding: 0px 5px 10px 10px;display: flex;gap: 10px;}
+.sidebar {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1.5px solid #ffc5c5;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-item {
+    border-radius: 15px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 95px;
+}
+.menu-item i {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    color: #444;
+}
+.menu-text {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* COLORES INICIALES */
+.panel-principal {
+    background-color: #ffcccc;
+}
+.expedientes {
+    background-color: #fff9c4;
+}
+.usuarios {
+    background-color: #e0f7fa;
+}
+.historial {
+    background-color: #f3e5f5;
+}
+.perfil {
+    background-color: #e8f5e9;
+}
+
+/* ESTADO ACTIVO */
+
+.menu-item.active {
+    background-color: #ff4d4d !important;
+    box-shadow: 0 6px 15px rgba(255, 77, 77, 0.3);
+
+    height: auto; /* se adapta */
+    padding: 12px 20px; /* espacio interno */
+    width: fit-content; /*se adapta al texto */
+    align-self: center; /* centrado en sidebar */
+    transform: scale(1.05);
+}
+.menu-item.active i {
+    display: none;
+}
+
+.menu-item {
+    transition:
+        all 0.2s ease,
+        width 0.2s ease;
+}
+
+.menu-item.active .menu-text {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* HOVER */
+.menu-item:hover:not(.active) {
+    transform: translateY(-4px);
+    filter: brightness(0.95);
+}
+
+/* HEADER Y CONTENIDO */
+.header-box {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid #ffc5c5;
+    padding: 5px 20px;
+    margin-bottom: 8px; /*más separación */
+}
+
+.content-box {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid #ffc5c5;
+    padding: 30px;
+    flex-grow: 1;
+    overflow-y: auto;
+
+}
+
+
+.top-section {
+    text-align: center;
+    padding: 20px 0 20px 0;
+    border-top: 2px solid #ffc5c5;
+    border-bottom: 2px solid #ffc5c5;
+    background: rgba(255, 255, 255, 0.6); 
+    margin: 10px auto 0 auto; 
+}
+
+.top-section h1 {
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: #a40000;
+}
+
+.login-container {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    border: 2px solid #ffc5c5;
+    padding: 35px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card h4 {
+    color: #a40000;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 12px 15px;
+    border: 1.5px solid #ccc;
+}
+
+.form-control:focus {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 0 0.15rem rgba(255, 77, 77, 0.25);
+}
+
+.btn-login {
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 30px;
+    padding: 12px;
+    font-weight: 600;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #e60000;
+}
+
+.forgot-link {
+    color: #a40000;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.illustration {
+    max-width: 450px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .illustration {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 80px; /* Se vuelve delgado */
+        padding: 20px 8px;
+    }
+
+    .menu-text {
+        display: none; /* Oculta el texto */
+    }
+
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .menu-item i {
+        margin-right: 0;
+        font-size: 1.6rem;
+    }
+
+    /* En modo colapsado, si está activo, mostramos una versión corta del texto o nada */
+    .menu-item.active {
+        justify-content: center;
+    }
+}
+
+/* ===== RESTABLECER CONTRASEÑA ===== */
+
+.reset-card {
+    max-width: 480px;
+    position: relative;
+}
+
+.reset-card .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    font-size: 1.2rem;
+    color: #444;
+    cursor: pointer;
+}
+
+.reset-card p {
+    text-align: center;
+    color: #a40000;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.reset-card .email-box {
+    background-color: #ffeaea;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.reset-card .btn-cancelar {
+    background: none;
+    border: none;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* ningun enlace del menu tendra subrayado */
+.sidebar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* CONTENEDOR ESPECÍFICO DEL DASHBOARD */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* TARJETAS DE ESTADÍSTICAS (Basadas en tu imagen) */
+.card-stat {
+    background: white;
+    border: 2px solid #7ebfff; /* Color azul de tu captura */
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card-stat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(126, 191, 255, 0.2);
+}
+
+.stat-title {
+    color: #4da3ff;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.stat-number {
+    color: #4da3ff;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* BOTONES DE ACCESO RÁPIDO */
+.btn-quick-access {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    height: 70px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.btn-green {
+    background-color: #d4ffd4; /* Verde suave de la imagen */
+    border-color: #98fb98;
+}
+
+.btn-yellow {
+    background-color: #fff4cc; /* Amarillo suave de la imagen */
+    border-color: #ffe082;
+}
+
+.btn-quick-access:hover {
+    transform: scale(1.03);
+    color: #000;
+    filter: brightness(0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+
+/* BOTONES PERSONALIZADOS */
+.btn-primary-custom {
+    background-color: #4da3ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+
+.btn-primary-custom:hover {
+    background-color: #3d8be0;
+    color: white;
+}
+
+.btn-outline-secondary-custom {
+    border: 1.5px solid #ffc5c5;
+    color: #666;
+    border-radius: 12px;
+    background-color: white;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+
+.btn-secondary-custom {
+    background-color: #c0c0c0;
+    color: #444;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-export-excel {
+    background-color: #c7f9cc;
+    color: black;
+    border-radius: 12px;
+    border: 1px solid #a8e6cf;
+    padding: 8px 25px;
+    font-weight: 700;
+}
+
+/* FILTROS */
+.card-filter {
+    border-radius: 15px;
+    background-color: white;
+}
+
+.border-pink {
+    border: 1.5px solid #ffc5c5 !important;
+}
+
+.bg-light-gray {
+    background-color: #f0f0f0;
+}
+
+/* TABLA */
+.custom-table {
+    font-size: 0.85rem;
+}
+
+.custom-table thead th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding: 12px;
+}
+
+.custom-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* BADGES DE ESTADO (Según tu imagen) */
+.badge-status {
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.badge-derivado {
+    background-color: #ffcccc;
+    color: #a40000;
+    border: 1px solid #ffb3b3;
+}
+
+.badge-atendido {
+    background-color: #d4ffd4;
+    color: #2d6a4f;
+    border: 1px solid #98fb98;
+}
+
+.badge-registrado {
+    background-color: #fff9c4;
+    color: #856404;
+    border: 1px solid #ffe082;
+}
+
+.badge-devuelto {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+    border: 1px solid #e1bee7;
+}
+
+/* Borde azul personalizado para el cuadro de registro */
+.border-blue-custom {
+    border: 2px solid #4da3ff !important;
+}
+
+/* Ajuste de inputs para que se vean como la imagen (fondo gris claro, sin bordes marcados) */
+#createExpedienteForm .form-control, 
+#createExpedienteForm .form-select {
+    background-color: #f1f1f1 !important;
+    border-radius: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+#createExpedienteForm .form-control::placeholder {
+    font-style: italic;
+    color: #bbb;
+}
+
+#createExpedienteForm .form-label {
+    font-size: 0.85rem;
+}
+/* Inputs más delgados y estilizados */
+.form-thin {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    min-height: calc(1.5em + 0.5rem + 2px) !important;
+    font-size: 0.85rem !important;
+    height: 32px !important; /* Altura fija para mayor control */
+}
+
+/* Evitar que los collapse se solapen visualmente */
+#createExpedienteForm, #filterSection {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilo para los labels en el formulario */
+.label-small {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #555;
+}
+
+/* Fuerza mayúsculas en inputs, textareas y celdas de tabla */
+input:not([type="password"]):not([name="username"]):not([name="password"]), textarea, select, .table td, .badge-status {
+text-transform: uppercase;}
+
+/* Placeholder también en mayúsculas si lo deseas */
+input::placeholder {
+    text-transform: uppercase;
+}
+
+/* Cuadros de datos (Gris claro) */
+.data-box {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 6px 15px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+/* Identificadores superiores estilo pastel */
+.badge-header-blue {
+    background-color: #d3e5ff; /* Azul pastel */
+    color: #000;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-radius: 12px;
+}
+
+.badge-header-purple {
+    background-color: #f3e5f5; /* Púrpura pastel */
+    color: #000;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-radius: 12px;
+}
+
+/* Ajuste para el badge de estado en la vista de detalles */
+.card-body .badge-status {
+    border-radius: 20px;
+    font-weight: 600;
+    border-width: 2px;
+}
+
+/* Estilo para cursiva en observaciones si están vacías */
+.italic {
+    font-style: italic;
+}
+
+
+.scroll-expediente{
+    max-height: 70vh;  
+    overflow-y: auto;   
+    overflow-x: hidden; 
+}
+
+.scroll-expediente::-webkit-scrollbar{
+    width:8px;
+}
+
+.scroll-expediente::-webkit-scrollbar-thumb{
+    background:#c9c9c9;
+    border-radius:10px;
+}
+
+.scroll-expediente::-webkit-scrollbar-thumb:hover{
+    background:#a8a8a8;
+}
+
+/* BOTON DERIVAR */
+.btn-derivar-exp {
+    background-color: #e8f3ff;
+    color: #0d6efd;
+    border: 1px solid #b6d4fe;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.btn-derivar-exp:hover {
+    background-color: #0d6efd;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(13,110,253,.25);
+}
+
+
+/* BOTON DEVOLVER */
+.btn-devolver-exp {
+    background-color: #ffecec;
+    color: #dc3545;
+    border: 1px solid #f5c2c7;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.btn-devolver-exp:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(220,53,69,.25);
+}
+
+/* PANEL FLOTANTE */
+.panel-derivar{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+}
+
+.panel-derivar-content{
+    background:white;
+    border-radius:14px;
+    width:360px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    animation: aparecer .2s ease;
+}
+
+.panel-derivar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 18px;
+    border-bottom:1px solid #eee;
+}
+
+.panel-derivar-body{
+    padding:18px;
+}
+
+.panel-derivar-footer{
+    padding:12px 18px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    border-top:1px solid #eee;
+}
+
+@keyframes aparecer{
+    from{
+        transform:scale(.95);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.pagination .page-link{
+    border-radius:8px;
+    margin:0 2px;
+    color:#0d6efd;
+    border:1px solid #dee2e6;
+}
+/* BADGE NARANJA PARA REPROCESAMIENTO */
+.badge-reproceso {
+    background-color: #ffe8cc; /* Naranja pastel */
+    color: #d97706;           /* Naranja oscuro/quemado */
+    border: 1px solid #fbbf24;
+}
+.pagination .page-item.active .page-link{
+    background-color:#0d6efd;
+    border-color:#0d6efd;
+    color:white !important;
+    font-weight:600;
+}
+
+.pagination .page-link:hover{
+    background-color:#eef3ff;
+    color:#0d6efd;
+}
+
+
+/* USUARIOS */
+/* BOTONES SUPERIORES ESPECÍFICOS */
+.btn-gestion-areas {
+    background-color: #d4ffd4; /* Verde suave */
+    color: black;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-weight: 700;
+    border: 1px solid #c1eec1;
+}
+
+.btn-anadir-usuario {
+    background-color: #ffd4d4; /* Rosado/Rojo suave */
+    color: black;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-weight: 700;
+    border: 1px solid #ffc1c1;
+}
+
+/* BADGES DE ROL */
+.badge-rol {
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.rol-admin {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border-color: #000; /* Borde negro fino como en la imagen */
+}
+
+.rol-analista {
+    background-color: #fef9c3;
+    color: #854d0e;
+    border-color: #000;
+}
+
+/* BADGES DE ESTADO USUARIO */
+.badge-estado-user {
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.user-activo {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #166534;
+}
+
+.user-inactivo {
+    background-color: #e5e7eb;
+    color: #374151;
+    border: 1px solid #374151;
+}
+
+/* Ajuste de la tabla para alineación izquierda en el nombre */
+.custom-table tbody td.text-start {
+    text-align: left !important;
+}
+
+/* BOTÓN NUEVA ÁREA/OFICINA */
+.btn-nueva-area {
+    background-color: #dcfce7; /* Verde muy claro */
+    color: black;
+    border: 1px solid #22c55e; /* Borde verde más fuerte */
+    border-radius: 15px;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.btn-nueva-area:hover {
+    background-color: #bbf7d0;
+    border-color: #16a34a;
+}
+
+/* BADGES DE ESTADO DE ÁREA */
+.badge-area-status {
+    padding: 4px 20px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.area-activa {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #166534;
+}
+
+.area-inactiva {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #4b5563;
+}
+
+/* Ajuste adicional para la tabla de áreas */
+.custom-table td {
+    vertical-align: middle;
+}
+
+/* AJUSTES ESPECÍFICOS DASHBOARD ANALISTA */
+
+/* Tarjetas con bordes de colores según la imagen */
+.card-stat.blue { border-color: #4da3ff; }
+.card-stat.red { border-color: #ff4d4d; }
+.card-stat.green { border-color: #28a745; }
+.card-stat.purple { border-color: #6a1b9a; }
+.card-stat.purple .stat-title, .card-stat.purple .stat-number { color: #6a1b9a; }
+
+/* Textos de las tarjetas */
+.card-stat.blue .stat-title, .card-stat.blue .stat-number { color: #4da3ff; }
+.card-stat.red .stat-title, .card-stat.red .stat-number { color: #ff4d4d; }
+.card-stat.green .stat-title, .card-stat.green .stat-number { color: #28a745; }
+
+/* Botón de acceso rápido más delgado (thinner) */
+.btn-quick-access.thinner {
+    height: 45px; /* Reducido de 70px a 45px */
+    width: auto;
+    padding: 0 35px;
+    font-size: 1rem;
+    border-radius: 12px;
+}
+
+/* Dashboard a ancho completo */
+.dashboard-full {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
