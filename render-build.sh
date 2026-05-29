@@ -3,6 +3,8 @@ set -o errexit
 
 echo "🚀 Instalando dependencias..."
 composer install --no-dev --prefer-dist --optimize-autoloader
+php artisan optimize:clear
+rm -f bootstrap/cache/config.php
 
 echo "📁 Creando carpetas necesarias..."
 mkdir -p storage/framework/cache \
