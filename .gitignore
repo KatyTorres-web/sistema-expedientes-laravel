@@ -29,3 +29,6 @@ Thumbs.db
 /bootstrap/cache/*.php
 /storage/debugbar
 /public/uploads
+.env
+/vendor
+/node_modules
