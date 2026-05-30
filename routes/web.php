@@ -11,6 +11,13 @@ use App\Http\Controllers\HistorialController;
 // ==========================================
 // RUTA RAÍZ (Redirección inteligente)
 // ==========================================
+Route::get('/ping', function () {
+    return response()->json([
+    'status' => 'ok',
+    'timestamp' => now()
+    ]);
+});
+
 Route::get('/', function () {
     if (auth()->check()) {
         return auth()->user()->rol_id == 1 
